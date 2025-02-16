@@ -67,14 +67,14 @@ void Book::buybook()
 	cout << "\nEnter number of books to buy: "; //запрос количества книг
 	cin >> count;
 	
-	if (count <= *stock) //если количество книг меньше, чем есть в запасе
+	if (count <= stock) //если количество книг меньше, чем есть в запасе
 	{
-	 	*stock = *stock - count; 								//уменьшаем количество запаса
-		 cout << "\nBooks bought sucessfully";				//сообщение: книги куплены успешно
-		 cout << "\nAmount: Rs. " << (*price) * count;	
+	 	stock -= count; 								//уменьшаем количество запаса ()
+		cout << "\nBooks bought sucessfully";			//сообщение: книги куплены успешно
+		cout << "\nAmount: Rs. " << price * count << endl;	
 	}
 	else 
- 		cout << "\nRequired copies not in stock";			//буемого количества копий нет в запасе
+ 		cout << "\nRequired copies not in stock" << endl;			//буемого количества копий нет в запасе
 	
 }
 

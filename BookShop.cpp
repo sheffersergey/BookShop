@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
 	using namespace std;
 
 	Book* book[20];
-	int i = 0, r, t, choice;
+	int i = 0, t, choice;
 	char titlebuy[20], authorbuy[20];
 
 	while (1)
