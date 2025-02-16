@@ -1,31 +1,21 @@
 
 #include <iostream>
-#include <string.h>
-#include <stdlib.h>
+#include <string>
+#include <vector>
+#include <limits>
+
+using namespace std;
 
 class Book{
 	private:
-		char *author, *title, *publisher;	//автор, название, издатель
-		float *price;								//цена
-		int *stock;									//запас
+		string author, title, publisher;	//автор, название, издатель
+		float price = 0;					//цена
+		int stock = 0;						//запас
 		
 	public:
-		Book()		//constructor of book class
-		{
-			//массив символов может интерпретироваться как строка
-			//указатель на значения типа char тоже может интерпретироваться как строка
-			//при выводе на констоль значения указателя фактически будет выводиться строка
-			author = new char[20]; 
-			title = new char[20];
-			publisher = new char[20];
-			price = new float;
-			stock = new int;
-		}
-		
-		void feeddata();					//внести данные о книге
-		void editdata();					//редактировать данные о книге
-		void showdata();					//показать данные о книге
-		int searsh(char[], char[]);	//найти книгу
-		void buybook();					//купить книгу
-	
+		void feeddata();										//внести данные о книге
+		void editdata();										//редактировать данные о книге
+		void showdata() const;									//показать данные о книге
+		bool search(const string& t, const string& a) const;	//найти книгу
+		void buybook();											//купить книгу
 };
