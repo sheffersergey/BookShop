@@ -8,14 +8,14 @@ using namespace std;
 
 class Book{
 	private:
-		string author, title, publisher;	//автор, название, издатель
-		float price = 0;					//цена
-		int stock = 0;						//запас
+		string author, title, publisher;	
+		float price = 0;					
+		int stock = 0;						
 		
 	public:
-		void feeddata();										//внести данные о книге
-		void editdata();										//редактировать данные о книге
-		void showdata() const;									//показать данные о книге
-		bool search(const string& t, const string& a) const;	//найти книгу
-		void buybook();											//купить книгу
+		void feeddata();										//enter book details
+		void editdata();										//edit book details
+		void showdata() const;									//show book details
+		bool search(const string& t, const string& a) const;	//find book
+		void buybook();											//buy book
 };

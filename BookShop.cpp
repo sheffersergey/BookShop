@@ -6,13 +6,13 @@
 
 int main(int argc, char** argv) {
 
-	using namespace std;
+	using std::cout;
+	using std::cin;
 
-	Book* book[20];
-	int i = 0, t, choice;
-	char titlebuy[20], authorbuy[20];
+	vector <Book> books;
+	int choice;
 
-	while (1)
+	while (true)
 	{
 		cout << "\n\n\tMENU"
 			<< "\n1. Entry of new book"
@@ -21,84 +21,92 @@ int main(int argc, char** argv) {
 			<< "\n4. Edit details of book"
 			<< "\n5. Exit"
 			<< "\n\nEnter your choice: ";
+
 		cin >> choice;
+		cin.ignore();
+
+		if (choice == 5) break;		//exit from program
+
+		string titlebuy, authorbuy;
+
 		switch (choice)
 		{
 		case 1:
-			book[i] = new Book;
-			book[i]->feeddata();
-			i++;
+		{
+			Book b;				//creating an object of class Book 
+			b.feeddata();			//entering new data
+			books.push_back(b);	//adding new item to the end of a list 
 			break;
+		}
 
 		case 2:
-			cin.ignore();
-			cout << "\nEnter title of book: "; 	//запрашиваем название книги
-			cin.getline(titlebuy, 20);
-			cout << "\nEnter author of book: ";	//запрашиваем автора книги
-			cin.getline(authorbuy, 20);
+		{
+			cout << "\nEnter title of book: ";
+			getline(cin, titlebuy);
+			cout << "\nEnter author of book: ";
+			getline(cin, authorbuy);
 
-			for (t = 0; t < i; t++)
+			bool found = false;
+
+			for (auto& book : books)					//iterating elemnts in "for each" style
 			{
-				if (book[i]->searsh(titlebuy, authorbuy) == 1)		//если книга найдена
+				if (book.search(titlebuy, authorbuy))	//if book found
 				{
-					book[t]->buybook();	//покупаем
+					book.buybook();
+					found = true;
 					break;
 				}
 			}
 
-			if (t == i)
-			{
-				cout << "\nThis book is not in stock";  //сообщение, что книги нет в запасе
-			}
+			if (!found) cout << "\nBook not found";		//if book not found
 			break;
+		}
 
 		case 3:
-			cin.ignore();
+		{
 			cout << "\nEnter title of book: ";
-			cin.getline(titlebuy, 20);
+			getline(cin, titlebuy);
 			cout << "\nEnter author of book: ";
-			cin.getline(authorbuy, 20);
+			getline(cin, authorbuy);
 
-			for (t = 0; t < i; t++)
+			bool found = false;
+
+			for (const auto& book : books)				//iterating elemnts in "for each" style
 			{
-				if (book[t]->searsh(titlebuy, authorbuy))
+				if (book.search(titlebuy, authorbuy))	//if book found
 				{
-					cout << "\nBook found successfully";
-					book[t]->showdata();
+					book.showdata();
+					found = true;
 					break;
 				}
 			}
-			if (t == i)
-			{
-				cout << "\nBook found successfully";
-			}
+			if (!found) cout << "\nBook not found";		//if book not found
 			break;
+		}
 
 		case 4:
-			cin.ignore();
+		{
 			cout << "\nEnter title of book: ";
-			cin.getline(titlebuy, 20);
-			cout << "Enter author of book: ";
-			cin.getline(authorbuy, 20);
+			getline(cin, titlebuy);
+			cout << "\nEnter author of book: ";
+			getline(cin, authorbuy);
 
-			for (t = 0; t < i; t++)
+			bool found = false;
+
+			for (auto& book : books)						//iterating elemnts in "for each" style
 			{
-				if (book[t]->searsh(titlebuy, authorbuy))
+				if (book.search(titlebuy, authorbuy))		//if book found
 				{
-					cout << "\nBook found successfully";
-					book[t]->editdata();
+					book.editdata();
+					found = true;
 					break;
 				}
 			}
-			if (t == i)
-			{
-				cout << "\nThis book is not in stock";
-			}
+			if (!found) cout << "\nBook not found";			//if book not found
 			break;
+		}
 
-		case 5:
-			exit(0);
-		default: cout << "\nInvalid choice entered";
+		default: cout << "\nInvalid choice entered" << endl;
 		}
 	}
 

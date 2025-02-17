@@ -5,7 +5,8 @@
 #include <limits>
 #include "book.h"
 
-using namespace std;
+using std::cout;
+using std::cin;
 
 void Book::feeddata()
 {
@@ -56,7 +57,7 @@ void Book::showdata() const
  cout << "\nStock Position: " << stock << endl;   
 }
 
-bool Book::search(const string& t, const string& a) const  //поиск книги по названию и автору
+bool Book::search(const string& t, const string& a) const  //search for a book by title and author
 {
 	return (title == t) && (author == a);
 }
@@ -64,17 +65,17 @@ bool Book::search(const string& t, const string& a) const  //поиск книги по назв
 void Book::buybook()
 {
 	int count;
-	cout << "\nEnter number of books to buy: "; //запрос количества книг
+	cout << "\nEnter number of books to buy: ";				//request the number of books
 	cin >> count;
 	
-	if (count <= stock) //если количество книг меньше, чем есть в запасе
+	if (count <= stock)										//if the number of books less than in stock
 	{
-	 	stock -= count; 								//уменьшаем количество запаса ()
-		cout << "\nBooks bought sucessfully";			//сообщение: книги куплены успешно
+	 	stock -= count; 									//reduce the stock
+		cout << "\nBooks bought sucessfully";				//message: Books bought sucessfully
 		cout << "\nAmount: Rs. " << price * count << endl;	
 	}
 	else 
- 		cout << "\nRequired copies not in stock" << endl;			//буемого количества копий нет в запасе
+ 		cout << "\nRequired copies not in stock" << endl;	//message about book shortage 
 	
 }
 
