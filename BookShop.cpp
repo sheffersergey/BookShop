@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <stdlib.h>
+#include <cstring>
 #include "book.h"
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
@@ -9,7 +10,9 @@ int main(int argc, char** argv) {
 	using std::cout;
 	using std::cin;
 
-	vector <Book> books;
+	const std::string filename = "books_database.json";
+
+	vector <Book> books = FileManager::loadFromFile(filename);
 	int choice;
 
 	while (true)
@@ -34,7 +37,7 @@ int main(int argc, char** argv) {
 		case 1:
 		{
 			Book b;				//creating an object of class Book 
-			b.feeddata();			//entering new data
+			b.feeddata();		//entering new data
 			books.push_back(b);	//adding new item to the end of a list 
 			break;
 		}
@@ -48,7 +51,7 @@ int main(int argc, char** argv) {
 
 			bool found = false;
 
-			for (auto& book : books)					//iterating elemnts in "for each" style
+			for (auto& book : books)	//iterating elemnts in "for each" style
 			{
 				if (book.search(titlebuy, authorbuy))	//if book found
 				{
@@ -58,7 +61,7 @@ int main(int argc, char** argv) {
 				}
 			}
 
-			if (!found) cout << "\nBook not found";		//if book not found
+			if (!found) cout << "\nBook not found";	//if book not found
 			break;
 		}
 
@@ -71,7 +74,7 @@ int main(int argc, char** argv) {
 
 			bool found = false;
 
-			for (const auto& book : books)				//iterating elemnts in "for each" style
+			for (const auto& book : books)	//iterating elemnts in "for each" style
 			{
 				if (book.search(titlebuy, authorbuy))	//if book found
 				{
@@ -80,7 +83,7 @@ int main(int argc, char** argv) {
 					break;
 				}
 			}
-			if (!found) cout << "\nBook not found";		//if book not found
+			if (!found) cout << "\nBook not found";	//if book not found
 			break;
 		}
 
@@ -93,22 +96,22 @@ int main(int argc, char** argv) {
 
 			bool found = false;
 
-			for (auto& book : books)						//iterating elemnts in "for each" style
+			for (auto& book : books) //iterating elemnts in "for each" style
 			{
-				if (book.search(titlebuy, authorbuy))		//if book found
+				if (book.search(titlebuy, authorbuy)) //if book found
 				{
 					book.editdata();
 					found = true;
 					break;
 				}
 			}
-			if (!found) cout << "\nBook not found";			//if book not found
+			if (!found) cout << "\nBook not found";	//if book not found
 			break;
 		}
 
 		default: cout << "\nInvalid choice entered" << endl;
 		}
 	}
-
+	FileManager::saveToFile(books, filename);
 	return 0;
 }
